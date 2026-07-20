@@ -570,4 +570,21 @@ document.addEventListener('DOMContentLoaded', () => {
     testImg.src = 'hero_bg.png';
   }
 
+  // ==========================================================================
+  // 13. DYNAMIC MOSQUITO CONTROL IMAGE LOADER (LOCAL IMAGE + FALLBACK)
+  // ==========================================================================
+  const mosquitoImg = document.getElementById('mosquito-service-img');
+  if (mosquitoImg) {
+    const testImg = new Image();
+    testImg.onload = function() {
+      // If mosquito_bg.png loads successfully (e.g. user places file), prioritize it
+      mosquitoImg.src = 'mosquito_bg.png';
+    };
+    testImg.onerror = function() {
+      // Fallback to high-quality Unsplash image of professional outdoor mosquito fogging in a garden
+      mosquitoImg.src = 'https://images.unsplash.com/photo-1590138221364-c466c9c63283?q=80&w=800&auto=format&fit=crop';
+    };
+    testImg.src = 'mosquito_bg.png';
+  }
+
 });
