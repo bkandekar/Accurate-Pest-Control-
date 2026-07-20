@@ -553,4 +553,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ==========================================================================
+  // 12. DYNAMIC HERO BACKGROUND LOADER (LOCAL IMAGE + HIGH QUALITY FALLBACK)
+  // ==========================================================================
+  const heroSectionElement = document.getElementById('home');
+  if (heroSectionElement) {
+    const testImg = new Image();
+    testImg.onload = function() {
+      // If hero_bg.png loads successfully (e.g. user places file), prioritize it
+      heroSectionElement.style.backgroundImage = "url('hero_bg.png')";
+    };
+    testImg.onerror = function() {
+      // Fallback to high-quality Unsplash image of professional technician in living room
+      heroSectionElement.style.backgroundImage = "url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1920&auto=format&fit=crop')";
+    };
+    testImg.src = 'hero_bg.png';
+  }
+
 });
