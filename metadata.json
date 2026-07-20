@@ -1,0 +1,6 @@
+{
+  "name": "Accurate Pest",
+  "description": "Premium pest control and biosecurity solutions website.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
