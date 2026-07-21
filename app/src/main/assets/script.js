@@ -554,19 +554,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 12. HIGH-PERFORMANCE HERO BACKGROUND GOOGLE DRIVE LOADER with FALLBACK
+  // 12. DYNAMIC HERO BACKGROUND IMAGE LOADER WITH FALLBACK
   // ==========================================================================
   const heroSectionElement = document.getElementById('home');
   if (heroSectionElement) {
-    const driveUrl = "https://drive.google.com/thumbnail?id=14GULzQVLxzhp6h9S8VCVBbAEdI0ArHpk&sz=w1920";
+    const heroUrl = "images/hero.jpg";
     const fallbackUrl = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1920&auto=format&fit=crop";
     
     const testImg = new Image();
+    testImg.onload = function() {
+      heroSectionElement.style.backgroundImage = `url('${heroUrl}')`;
+    };
     testImg.onerror = function() {
-      // If the Google Drive thumbnail URL fails to load, fall back to high-quality Unsplash image
+      // If images/hero.jpg hasn't been uploaded yet, fall back to high-quality Unsplash image
       heroSectionElement.style.backgroundImage = `url('${fallbackUrl}')`;
     };
-    testImg.src = driveUrl;
+    testImg.src = heroUrl;
   }
 
 });

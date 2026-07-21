@@ -386,7 +386,7 @@ button, input, select, textarea {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  background-image: url('https://drive.google.com/thumbnail?id=14GULzQVLxzhp6h9S8VCVBbAEdI0ArHpk&sz=w1920');
+  background-image: url('images/hero.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
