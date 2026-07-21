@@ -554,20 +554,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 12. DYNAMIC HERO BACKGROUND LOADER (LOCAL IMAGE + HIGH QUALITY FALLBACK)
+  // 12. DYNAMIC HERO BACKGROUND LOADER (GOOGLE DRIVE LINK + FALLBACKS)
   // ==========================================================================
   const heroSectionElement = document.getElementById('home');
   if (heroSectionElement) {
+    const driveUrl = "https://lh3.googleusercontent.com/d/14GULzQVLxzhp6h9S8VCVBbAEdI0ArHpk";
+    const backupDriveUrl = "https://docs.google.com/uc?export=download&id=14GULzQVLxzhp6h9S8VCVBbAEdI0ArHpk";
+    
     const testImg = new Image();
     testImg.onload = function() {
-      // If hero_bg.png loads successfully (e.g. user places file), prioritize it
-      heroSectionElement.style.backgroundImage = "url('hero_bg.png')";
+      heroSectionElement.style.backgroundImage = `url('${driveUrl}')`;
     };
     testImg.onerror = function() {
-      // Fallback to high-quality Unsplash image of professional technician in living room
-      heroSectionElement.style.backgroundImage = "url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1920&auto=format&fit=crop')";
+      const altImg = new Image();
+      altImg.onload = function() {
+        heroSectionElement.style.backgroundImage = `url('${backupDriveUrl}')`;
+      };
+      altImg.onerror = function() {
+        const localImg = new Image();
+        localImg.onload = function() {
+          heroSectionElement.style.backgroundImage = "url('hero_bg.png')";
+        };
+        localImg.onerror = function() {
+          heroSectionElement.style.backgroundImage = "url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1920&auto=format&fit=crop')";
+        };
+        localImg.src = 'hero_bg.png';
+      };
+      altImg.src = backupDriveUrl;
     };
-    testImg.src = 'hero_bg.png';
+    testImg.src = driveUrl;
   }
 
   // ==========================================================================
