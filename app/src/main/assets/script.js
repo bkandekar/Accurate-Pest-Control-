@@ -602,4 +602,29 @@ document.addEventListener('DOMContentLoaded', () => {
     testImg.src = 'mosquito_bg.png';
   }
 
+  // ==========================================================================
+  // 14. DYNAMIC TERMITE CONTROL IMAGE LOADER (GOOGLE DRIVE LINK + FALLBACKS)
+  // ==========================================================================
+  const termiteImg = document.getElementById('termite-service-img');
+  if (termiteImg) {
+    const driveUrl = "https://lh3.googleusercontent.com/d/1WiANMHg44K5KmvPa-pYLcs3luSjbH-tF";
+    const backupDriveUrl = "https://docs.google.com/uc?export=download&id=1WiANMHg44K5KmvPa-pYLcs3luSjbH-tF";
+    
+    const testImg = new Image();
+    testImg.onload = function() {
+      termiteImg.src = driveUrl;
+    };
+    testImg.onerror = function() {
+      const altImg = new Image();
+      altImg.onload = function() {
+        termiteImg.src = backupDriveUrl;
+      };
+      altImg.onerror = function() {
+        termiteImg.src = 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=800&auto=format&fit=crop';
+      };
+      altImg.src = backupDriveUrl;
+    };
+    testImg.src = driveUrl;
+  }
+
 });
