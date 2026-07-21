@@ -554,75 +554,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 12. DYNAMIC HERO BACKGROUND LOADER (GOOGLE DRIVE LINK + FALLBACKS)
+  // 12. HIGH-PERFORMANCE HERO BACKGROUND GOOGLE DRIVE LOADER with FALLBACK
   // ==========================================================================
   const heroSectionElement = document.getElementById('home');
   if (heroSectionElement) {
-    const driveUrl = "https://lh3.googleusercontent.com/d/14GULzQVLxzhp6h9S8VCVBbAEdI0ArHpk";
-    const backupDriveUrl = "https://docs.google.com/uc?export=download&id=14GULzQVLxzhp6h9S8VCVBbAEdI0ArHpk";
+    const driveUrl = "https://drive.google.com/thumbnail?id=14GULzQVLxzhp6h9S8VCVBbAEdI0ArHpk&sz=w1920";
+    const fallbackUrl = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1920&auto=format&fit=crop";
     
     const testImg = new Image();
-    testImg.onload = function() {
-      heroSectionElement.style.backgroundImage = `url('${driveUrl}')`;
-    };
     testImg.onerror = function() {
-      const altImg = new Image();
-      altImg.onload = function() {
-        heroSectionElement.style.backgroundImage = `url('${backupDriveUrl}')`;
-      };
-      altImg.onerror = function() {
-        const localImg = new Image();
-        localImg.onload = function() {
-          heroSectionElement.style.backgroundImage = "url('hero_bg.png')";
-        };
-        localImg.onerror = function() {
-          heroSectionElement.style.backgroundImage = "url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1920&auto=format&fit=crop')";
-        };
-        localImg.src = 'hero_bg.png';
-      };
-      altImg.src = backupDriveUrl;
-    };
-    testImg.src = driveUrl;
-  }
-
-  // ==========================================================================
-  // 13. DYNAMIC MOSQUITO CONTROL IMAGE LOADER (LOCAL IMAGE + FALLBACK)
-  // ==========================================================================
-  const mosquitoImg = document.getElementById('mosquito-service-img');
-  if (mosquitoImg) {
-    const testImg = new Image();
-    testImg.onload = function() {
-      // If mosquito_bg.png loads successfully (e.g. user places file), prioritize it
-      mosquitoImg.src = 'mosquito_bg.png';
-    };
-    testImg.onerror = function() {
-      // Fallback to high-quality Unsplash image of professional outdoor mosquito fogging in a garden
-      mosquitoImg.src = 'https://images.unsplash.com/photo-1590138221364-c466c9c63283?q=80&w=800&auto=format&fit=crop';
-    };
-    testImg.src = 'mosquito_bg.png';
-  }
-
-  // ==========================================================================
-  // 14. DYNAMIC TERMITE CONTROL IMAGE LOADER (GOOGLE DRIVE LINK + FALLBACKS)
-  // ==========================================================================
-  const termiteImg = document.getElementById('termite-service-img');
-  if (termiteImg) {
-    const driveUrl = "https://lh3.googleusercontent.com/d/1WiANMHg44K5KmvPa-pYLcs3luSjbH-tF";
-    const backupDriveUrl = "https://docs.google.com/uc?export=download&id=1WiANMHg44K5KmvPa-pYLcs3luSjbH-tF";
-    
-    const testImg = new Image();
-    testImg.onload = function() {
-      termiteImg.src = driveUrl;
-    };
-    testImg.onerror = function() {
-      const altImg = new Image();
-      altImg.onload = function() {
-        termiteImg.src = backupDriveUrl;
-      };
-      altImg.onerror = function() {
-        termiteImg.src = 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=800&auto=format&fit=crop';
-      };
-      altImg.src = backupDriveUrl;
+      // If the Google Drive thumbnail URL fails to load, fall back to high-quality Unsplash image
+      heroSectionElement.style.backgroundImage = `url('${fallbackUrl}')`;
     };
     testImg.src = driveUrl;
   }
